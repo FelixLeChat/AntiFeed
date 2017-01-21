@@ -11,8 +11,8 @@ class AppTabs extends Component {
   render() {
     return (
 		<Tabs style={style} value={this.props.location.pathname}>
-			<Tab value="/" label="KeywordFeed" containerElement={<Link to="/"></Link>} />
-	    <Tab value="/anti-feed" label="AntiFeed" containerElement={<Link to="/anti-feed"></Link>} />
+			<Tab value="/" label="Keyword Feed" containerElement={<Link to="/"></Link>} />
+	    <Tab value="/anti-feed" label="Anti Feed" containerElement={<Link to="/anti-feed"></Link>} />
 	  </Tabs>
     );
   }
