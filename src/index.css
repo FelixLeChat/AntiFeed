@@ -4,8 +4,13 @@ body {
   font-family: sans-serif;
 }
 
+.anti-feed {
+	padding-top: 40px;
+}
 .anti-feed > h1 {
 	text-align: center;
+	box-shadow: rgb(220, 220, 220) 0px 2px 0px;
+  padding-bottom: 15px;
 }
 .anti-feed--feedbox {
 	max-width: 800px;

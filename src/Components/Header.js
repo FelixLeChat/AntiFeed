@@ -11,7 +11,7 @@ class Header extends Component {
   render() {
     return (
       <div className="header">
-      	<AppBar title="AntiFeed - We burst your social bubble" style={style} iconElementLeft={<Logo />} >
+      	<AppBar title="Anti Feed ~ We burst your social bubble" style={style} iconElementLeft={<Logo />} >
 	        <AppTabs location={this.props.location} />
       	</AppBar>
       </div>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './Components/Header';
+import Favicon from 'react-favicon';
 
 import './App.css';
 import './css/flexboxgrid.min.css';
@@ -16,6 +17,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
       	<div>
+          <Favicon url={["/svg/bubble-burst.ico"]}/>
 	        <Header location={this.props.location} />
 	        <div>
 	        	{this.props.children}

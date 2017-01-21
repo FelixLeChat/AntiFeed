@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const style = {
   margin: 12,
+  width: '200px'
 };
 
 class AntiFeed extends Component {
@@ -11,7 +12,6 @@ class AntiFeed extends Component {
 		super(props);
 
 		this.state = { tweets: []};
-
 		this.addDefaultTweet = this.addDefaultTweet.bind(this);
 	}
 
@@ -34,15 +34,16 @@ class AntiFeed extends Component {
 
 				<div className="row center-xs">
 					<div className="col-xs-8">
-	        	<div className="box">
+      			<div className="box">
 							<FeedBox tweets={this.state.tweets} />
 						</div>
 					</div>
 				</div>
 
 				<div className="center-button">
-					<RaisedButton label="Primary" primary={true} style={style} onClick={this.addDefaultTweet} />
+					<RaisedButton label="Refresh Feed" primary={true} style={style} onClick={this.addDefaultTweet} />
 				</div>
+
 			</div>
     );
   }
