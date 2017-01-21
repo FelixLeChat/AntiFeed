@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './Components/Header';
 
 import './App.css';
+import './css/flexboxgrid.min.css';
 
 //ConUHacks2017!
 class App extends Component {

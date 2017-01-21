@@ -3,3 +3,27 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.anti-feed > h1 {
+	text-align: center;
+}
+.anti-feed--feedbox {
+	max-width: 800px;
+}
+
+.feed-box {
+	min-height: 200px;
+	text-align: left;
+}
+
+.feed-item {
+}
+
+.logo {
+  height: 45px;
+  margin-top: -12px;
+}
+
+.center-button {
+	text-align: center;
+}

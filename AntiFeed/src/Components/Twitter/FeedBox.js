@@ -6,9 +6,9 @@ import FeedItem from './FeedItem';
 class FeedBox extends Component {
   render() {
   	console.log(this.props.tweets);
-  	
+
     return (
-      <div>
+      <div className="feed-box">
       	{this.props.tweets && this.props.tweets.map((item, id) =>
       		<FeedItem tweet={item} key={id} />
       	)}
