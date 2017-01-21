@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import IconButton from 'material-ui/IconButton'
+import Isvg from 'react-inlinesvg';
 
 
 class Logo extends Component {
   render() {
     return (
       <IconButton>
-      	<img className="logo" role="presentation" src="https://cdn.sstatic.net/Sites/stackoverflow/img/apple-touch-icon@2.png?v=73d79a89bded" />
+      	<div className="logo">
+      		<Isvg src="/svg/bubble-burst.svg" />
+      	</div>
       </IconButton>
     );
   }

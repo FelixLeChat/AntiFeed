@@ -17,7 +17,9 @@ class AntiFeed extends Component {
 
 	addDefaultTweet() {
 		var newTweets = this.state.tweets;
-		newTweets.push({ 
+		newTweets.push({
+			name: "Felix",
+			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 		});

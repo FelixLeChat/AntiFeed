@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {Card, CardHeader, CardText} from 'material-ui/Card';
 
+const style = {
+  'marginTop': 12,
+};
 
 // Feed box that contains the regular feed on the left and opposite feed on the right
 class FeedItem extends Component {
@@ -9,13 +12,11 @@ class FeedItem extends Component {
   	if(!this.props.tweet){
   		return;
   	}
-
-  	var text = this.props.tweet.text;
-  	var imageLink = this.props.tweet.profileUrl;
+  	var {text, profileUrl, name, handler} = this.props.tweet;
 
     return (
-    	<Card>
-    		<CardHeader title="Title" subtitle="Subtitle" avatar={imageLink} />
+    	<Card style={style}>
+    		<CardHeader title={name} subtitle={handler} avatar={profileUrl} />
 		    <CardText>{text}</CardText>
   		</Card>
     );

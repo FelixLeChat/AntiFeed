@@ -20,8 +20,10 @@ body {
 }
 
 .logo {
-  height: 45px;
-  margin-top: -12px;
+	height: 60px;
+  width: 45px;
+  margin-top: -14px;
+  margin-left: -10px;
 }
 
 .center-button {
