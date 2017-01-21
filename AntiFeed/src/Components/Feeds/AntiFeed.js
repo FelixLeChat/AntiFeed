@@ -31,7 +31,7 @@ class AntiFeed extends Component {
 				<h1>Anti Feed</h1>
 
 				<div className="row center-xs">
-					<div className="col-xs-6">
+					<div className="col-xs-8">
 	        	<div className="box">
 							<FeedBox tweets={this.state.tweets} />
 						</div>
