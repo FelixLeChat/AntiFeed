@@ -4,7 +4,7 @@ import {Link} from 'react-router';
 
 const style = {
 	width: '100%',
-}
+};
 
 
 class AppTabs extends Component {

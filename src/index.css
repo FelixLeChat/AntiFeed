@@ -4,8 +4,13 @@ body {
   font-family: sans-serif;
 }
 
+.anti-feed {
+	padding-top: 40px;
+}
 .anti-feed > h1 {
 	text-align: center;
+	box-shadow: rgb(220, 220, 220) 0px 2px 0px;
+  padding-bottom: 15px;
 }
 .anti-feed--feedbox {
 	max-width: 800px;
@@ -20,10 +25,20 @@ body {
 }
 
 .logo {
-  height: 45px;
-  margin-top: -12px;
+	height: 60px;
+  width: 50px;
+  margin-top: -17px;
+  margin-left: -20px;
 }
 
 .center-button {
 	text-align: center;
+}
+
+.header > div:first-of-type {
+	padding-top: 28px;
+}
+
+.header > div:first-of-type > div:first-of-type {
+	margin-left: 15px !important;
 }
