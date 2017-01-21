@@ -10,7 +10,7 @@ const style = {
 class Header extends Component {
   render() {
     return (
-      <div>
+      <div className="header">
       	<AppBar title="AntiFeed - We burst your social bubble" style={style} iconElementLeft={<Logo />} >
 	        <AppTabs location={this.props.location} />
       	</AppBar>
