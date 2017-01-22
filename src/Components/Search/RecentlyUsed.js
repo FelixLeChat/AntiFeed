@@ -30,7 +30,7 @@ class RecentlyUsed extends Component {
 				{this.props.keywords.map((item, id) => 
 					<Chip style={styles.chip} key={id} 
 					onTouchTap={this.handleTouchTap}
-					onRequestDelete={this.handleRequestDelete}
+					onRequestDelete={() => this.props.removeKeyword(id)}
 					>{item}</Chip>
 					)}
       </div>
