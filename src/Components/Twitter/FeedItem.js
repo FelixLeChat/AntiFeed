@@ -21,12 +21,14 @@ class FeedItem extends Component {
   	if(!this.props.tweet){
   		return;
   	}
-  	var {text, profileUrl, name, handler, retweets, favorites} = this.props.tweet;
+  	var {text, profileUrl, name, handle, retweets, favorites} = this.props.tweet;
+
+    text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold\">$1</span>");
 
     return (
     	<Card style={styles.card}>
-    		<CardHeader title={name} subtitle={handler} avatar={profileUrl} />
-		    <CardText>{text}</CardText>
+    		<CardHeader title={name} subtitle={"@" + handle} avatar={profileUrl} />
+		    <CardText dangerouslySetInnerHTML={{__html: text}} />
         
         <Badge badgeContent={retweets} badgeStyle={{top: 12, right: 12, backgroundColor: '#333333', color: '#FAFAFA'}}>
           <IconButton tooltip="RETWEETS" iconStyle={{fill: '#5C913B'}}>
