@@ -1,5 +1,3 @@
-'use strict';
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -23,8 +21,8 @@ exports.default = {
   spacing: _spacing2.default,
   fontFamily: 'Roboto, sans-serif',
   palette: {
-    primary1Color: '#30415D',
-    primary2Color: '#B37D4E',
+    primary1Color: '#333333',
+    primary2Color: '#FAFAFA',
     primary3Color: _colors.grey400,
     accent1Color: '#CF6766',//_colors.pinkA200,
     accent2Color: _colors.grey100,
