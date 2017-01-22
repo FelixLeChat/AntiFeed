@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
-import ActionGrade from 'material-ui/svg-icons/action/grade';
+import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
 import ActionShare  from 'material-ui/svg-icons/social/share';
+import {grey400, blue500} from 'material-ui/styles/colors';
+import FontIcon from 'material-ui/FontIcon';
 
 const styles = {
   card: {
@@ -11,6 +12,24 @@ const styles = {
   },
   nofitication: {
     backgroundColor: 'black'
+  },
+  cardText: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingBottom: '0',
+    paddingTop: '0',
+  },
+  cardVal: {
+    display: 'flex',
+    alignItems: 'center',
+    color: grey400,
+  },
+  cardInVal: {
+    display: 'flex',
+    flexGrow: '1',
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    width: '120px',
   }
 };
 
@@ -26,20 +45,15 @@ class FeedItem extends Component {
     return (
     	<Card style={styles.card}>
     		<CardHeader title={name} subtitle={handler} avatar={profileUrl} />
-		    <CardText>{text}</CardText>
-        
-        <Badge badgeContent={retweets} badgeStyle={{top: 12, right: 12, backgroundColor: '#333333', color: '#FAFAFA'}}>
-          <IconButton tooltip="RETWEETS" iconStyle={{fill: '#5C913B'}}>
-            <ActionShare />
-          </IconButton>
-        </Badge>
-
-        <Badge badgeContent={favorites} badgeStyle={{top: 12, right: 12, backgroundColor: '#333333', color: '#FAFAFA'}}>
-          <IconButton tooltip="FAVORITES" iconStyle={{fill: '#FFAC33'}}>
-            <ActionGrade />
-          </IconButton>
-        </Badge>
-
+		    <CardText style={styles.cardText}>
+          <div>{text}</div>
+          <div style={styles.cardVal}>
+            <div style={styles.cardInVal}>
+              <ActionShare color={grey400}/>
+              <div style={{marginRight: '5px'}}>{retweets}</div>
+            </div>
+          </div>
+        </CardText>
   		</Card>
     );
   }
