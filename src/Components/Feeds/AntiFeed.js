@@ -1,7 +1,9 @@
+import cookie from 'react-cookie';
 import React, { Component } from 'react';
 import FeedBox from '../Twitter/FeedBox';
 import RaisedButton from 'material-ui/RaisedButton';
 import Loading from '../Loading/Loading';
+import TweetService from '../../Services/tweets';
 
 const style = {
   margin: 12,
@@ -9,6 +11,19 @@ const style = {
 };
 
 class AntiFeed extends Component {
+	componentWillMount() {
+    const id = cookie.load('connect.cid');
+		console.log(id);
+  }
+	constructor(props) {
+		super(props);
+		TweetService
+			.searchByUser()
+			.catch(() => {
+				console.log('catch');
+				this.props.history.push('/twitter-login');
+			})
+	}
   render() {
     return (
 			<div className="anti-feed">
