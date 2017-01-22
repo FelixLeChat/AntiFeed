@@ -24,7 +24,7 @@ export default class MainContainer extends Component {
 			keywordsTweets: {positive:[], negative:[]}, 
 			hashtagTweets: {positive:[], negative:[]},
 			oppositeHandle: ["NotMyPresident", "TheResistance"],
-			relatedHandle: ["POTUS", "PresidentTrump", "NRA"],
+			relatedHandle: ["POTUS", "PresidentTrump", "NRA", "TrumpForPresident"],
 			antiTweets: [],
 			isLoading: false,
 			lastWord: ""
