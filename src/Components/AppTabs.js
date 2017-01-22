@@ -8,11 +8,15 @@ const style = {
 
 
 class AppTabs extends Component {
+  scrollToTop() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
 		<Tabs style={style} value={this.props.location.pathname}>
-			<Tab value="/" label="Keyword Feed" containerElement={<Link to="/"></Link>} />
-	    <Tab value="/anti-feed" label="Anti Feed" containerElement={<Link to="/anti-feed"></Link>} />
+			<Tab value="/" label="Keyword Feed" containerElement={<Link to="/"></Link>} onClick={this.scrollToTop} />
+	    <Tab value="/anti-feed" label="Anti Feed" containerElement={<Link to="/anti-feed"></Link>} onClick={this.scrollToTop} />
 	  </Tabs>
     );
   }

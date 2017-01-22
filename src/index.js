@@ -17,12 +17,22 @@ export default class MainContainer extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { keywords: ["trump", "hilary"], keywordsTweets: {good:[], bad:[]}, antiTweets: []};
+		this.state = { 
+			keywords: ["trump", "hilary"], 
+			keywordsTweets: {positive:[], negative:[]}, 
+			antiTweets: [],
+			isLoading: false
+		};
 
 		this.addDefaultTweets = this.addDefaultTweets.bind(this);
 		this.addDefaultTweet = this.addDefaultTweet.bind(this);
 		this.removeKeyword = this.removeKeyword.bind(this);
 		this.doSearch = this.doSearch.bind(this);
+		this.resetLoading = this.resetLoading.bind(this);
+	}
+
+	resetLoading() {
+		this.setState({isLoading: false});
 	}
 
 	//-------------------------------- Anti Feed --------------------------------------//
@@ -30,6 +40,8 @@ export default class MainContainer extends Component {
 		var newTweets = this.state.antiTweets;
 		newTweets.push({
 			name: "Felix",
+			retweets: Math.floor(Math.random() * 500),
+			favorites: Math.floor(Math.random() * 1000),
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
@@ -40,23 +52,27 @@ export default class MainContainer extends Component {
 
 	//-------------------------------- Keywords Feed --------------------------------------//
 	addDefaultTweets() {
-		var newGoodTweets = this.state.keywordsTweets.good;
+		var newGoodTweets = this.state.keywordsTweets.positive;
 		newGoodTweets.push({
 			name: "Felix - GOOD",
+			retweets: Math.floor(Math.random() * 500) + 1,
+			favorites: Math.floor(Math.random() * 1000) + 1,
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 		});
 
-		var newBadTweets = this.state.keywordsTweets.bad;
+		var newBadTweets = this.state.keywordsTweets.negative;
 		newBadTweets.push({
 			name: "Felix - BAD",
+			retweets: Math.floor(Math.random() * 500) + 1,
+			favorites: Math.floor(Math.random() * 1000) + 1,
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 		});
 
-		this.setState({keywordsTweets: {good: newGoodTweets, bad: newBadTweets}}, () => {console.log(this.state.keywordsTweets)});
+		this.setState({keywordsTweets: {positive: newGoodTweets, negative: newBadTweets}}, () => {console.log(this.state.keywordsTweets)});
 	}
 
 	doSearch(keyword) {
@@ -89,14 +105,16 @@ export default class MainContainer extends Component {
 						doSearch={this.doSearch} 
 						removeKeyword={this.removeKeyword}
 						tweets={this.state.keywordsTweets}
-						addDefaultTweets={this.addDefaultTweets} />
+						addDefaultTweets={this.addDefaultTweets}
+						isLoading={this.state.isLoading} />
 					} />
 
 					<Route path='/anti-feed' component={() => 
 						<AntiFeed
 						history={browserHistory}
 						tweets={this.state.antiTweets} 
-						addDefaultTweet={this.addDefaultTweet} />
+						addDefaultTweet={this.addDefaultTweet}
+						isLoading={this.state.isLoading} />
 					}/>
 					<Route path='/twitter-login' component={TwitterLogin} />
 				</Route>

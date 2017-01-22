@@ -2,6 +2,7 @@ import cookie from 'react-cookie';
 import React, { Component } from 'react';
 import FeedBox from '../Twitter/FeedBox';
 import RaisedButton from 'material-ui/RaisedButton';
+import Loading from '../Loading/Loading';
 import TweetService from '../../Services/tweets';
 
 const style = {
@@ -29,18 +30,19 @@ class AntiFeed extends Component {
 				<div className="row center-xs">
 					<div className="col-xs-8">
             <h2>Your personnalized Anti Feed</h2>
-            <div className="right-button">
+
+            {this.props.isLoading && <Loading />}
+
+            {!this.props.isLoading && <div className="right-button main-button">
               <RaisedButton label="Refresh Feed" primary={true} style={style} onClick={this.props.addDefaultTweet} />
-            </div>
+            </div>}
             
-      			<div className="box">
+      			{!this.props.isLoading && <div className="box">
 							{this.props.tweets && <FeedBox tweets={this.props.tweets} />}
-						</div>
+						</div>}
+            
 					</div>
 				</div>
-
-
-
 			</div>
     );
   }
