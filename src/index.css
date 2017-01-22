@@ -53,8 +53,24 @@ body {
 	margin-left: 15px !important;
 }
 
+.push {
+  height: 100px;
+}
 
+.footer {
+  position: relative;
+  margin: 0 auto;
+  height: 100px;
+}
 
+.wrapper {
+  position: relative;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  display: block;
+  min-height: 800px;
+}
 
 /* Color Scheme */
 
@@ -72,11 +88,16 @@ body {
 }
 
 /******************** BUTTON ************************/
-button {
+.main-button > div > button {
   background-color: #333333 !important;  
 }
 
 /******************** LOGO **************************/
 .logo > span > svg {
   fill: white !important;
+}
+
+/******************** FOOTER ************************/
+.footer {
+  background-color: #333333 !important;
 }

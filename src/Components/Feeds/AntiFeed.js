@@ -18,7 +18,7 @@ class AntiFeed extends Component {
 
             {this.props.isLoading && <Loading />}
 
-            {!this.props.isLoading && <div className="right-button">
+            {!this.props.isLoading && <div className="right-button main-button">
               <RaisedButton label="Refresh Feed" primary={true} style={style} onClick={this.props.addDefaultTweet} />
             </div>}
             

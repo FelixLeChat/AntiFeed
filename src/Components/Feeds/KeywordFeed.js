@@ -36,7 +36,7 @@ class KeywordFeed extends Component {
 
 			<div className="row center-xs">
 				<div className="col-xs-8">
-					<div className="right-button">
+					<div className="right-button main-button">
 						<RaisedButton label="Refresh Feed" primary={true} style={styles.button} onClick={this.props.addDefaultTweets} />
 					</div>
 				</div>

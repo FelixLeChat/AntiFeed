@@ -19,7 +19,7 @@ export default class MainContainer extends Component {
 			keywords: ["trump", "hilary"], 
 			keywordsTweets: {good:[], bad:[]}, 
 			antiTweets: [],
-			isLoading: true
+			isLoading: false
 		};
 
 		this.addDefaultTweets = this.addDefaultTweets.bind(this);
@@ -27,10 +27,6 @@ export default class MainContainer extends Component {
 		this.removeKeyword = this.removeKeyword.bind(this);
 		this.doSearch = this.doSearch.bind(this);
 		this.resetLoading = this.resetLoading.bind(this);
-	}
-
-	componentDidMount() {
-		setTimeout(this.resetLoading() , 10000);
 	}
 
 	resetLoading() {
@@ -42,6 +38,8 @@ export default class MainContainer extends Component {
 		var newTweets = this.state.antiTweets;
 		newTweets.push({
 			name: "Felix",
+			retweets: Math.floor(Math.random() * 500),
+			favorites: Math.floor(Math.random() * 1000),
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
@@ -55,6 +53,8 @@ export default class MainContainer extends Component {
 		var newGoodTweets = this.state.keywordsTweets.good;
 		newGoodTweets.push({
 			name: "Felix - GOOD",
+			retweets: Math.floor(Math.random() * 500) + 1,
+			favorites: Math.floor(Math.random() * 2000) + 1,
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
@@ -63,6 +63,8 @@ export default class MainContainer extends Component {
 		var newBadTweets = this.state.keywordsTweets.bad;
 		newBadTweets.push({
 			name: "Felix - BAD",
+			retweets: Math.floor(Math.random() * 500) + 1,
+			favorites: Math.floor(Math.random() * 2000) + 1,
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
