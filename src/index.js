@@ -18,7 +18,7 @@ export default class MainContainer extends Component {
 
 		this.state = { 
 			keywords: ["trump", "hilary"], 
-			keywordsTweets: {good:[], bad:[]}, 
+			keywordsTweets: {positive:[], negative:[]}, 
 			antiTweets: [],
 			isLoading: false
 		};
@@ -51,7 +51,7 @@ export default class MainContainer extends Component {
 
 	//-------------------------------- Keywords Feed --------------------------------------//
 	addDefaultTweets() {
-		var newGoodTweets = this.state.keywordsTweets.good;
+		var newGoodTweets = this.state.keywordsTweets.positive;
 		newGoodTweets.push({
 			name: "Felix - GOOD",
 			retweets: Math.floor(Math.random() * 500) + 1,
@@ -61,7 +61,7 @@ export default class MainContainer extends Component {
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 		});
 
-		var newBadTweets = this.state.keywordsTweets.bad;
+		var newBadTweets = this.state.keywordsTweets.negative;
 		newBadTweets.push({
 			name: "Felix - BAD",
 			retweets: Math.floor(Math.random() * 500) + 1,
@@ -71,7 +71,7 @@ export default class MainContainer extends Component {
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 		});
 
-		this.setState({keywordsTweets: {good: newGoodTweets, bad: newBadTweets}}, () => {console.log(this.state.keywordsTweets)});
+		this.setState({keywordsTweets: {positive: newGoodTweets, negative: newBadTweets}}, () => {console.log(this.state.keywordsTweets)});
 	}
 
 	doSearch(keyword) {
