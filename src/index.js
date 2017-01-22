@@ -54,7 +54,7 @@ export default class MainContainer extends Component {
 		newGoodTweets.push({
 			name: "Felix - GOOD",
 			retweets: Math.floor(Math.random() * 500) + 1,
-			favorites: Math.floor(Math.random() * 2000) + 1,
+			favorites: Math.floor(Math.random() * 1000) + 1,
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
@@ -64,7 +64,7 @@ export default class MainContainer extends Component {
 		newBadTweets.push({
 			name: "Felix - BAD",
 			retweets: Math.floor(Math.random() * 500) + 1,
-			favorites: Math.floor(Math.random() * 2000) + 1,
+			favorites: Math.floor(Math.random() * 1000) + 1,
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
