@@ -18,7 +18,7 @@ export default class MainContainer extends Component {
 		super(props);
 
 		this.state = { 
-			keywords: ["trump", "hilary"], 
+			keywords: ["Trump", "Hilary"], 
 			keywordsTweets: {positive:[], negative:[]}, 
 			antiTweets: [],
 			isLoading: false
@@ -30,6 +30,7 @@ export default class MainContainer extends Component {
 		this.doSearch = this.doSearch.bind(this);
 		this.resetLoading = this.resetLoading.bind(this);
 		this.setLoading = this.setLoading.bind(this);
+		this.camelize = this.camelize.bind(this);
 	}
 
 	setLoading() {
@@ -84,7 +85,8 @@ export default class MainContainer extends Component {
 
 		this.setLoading();
 
-		const normalizedKeyword = keyword.toLowerCase();
+		const normalizedKeyword = this.camelize(keyword);
+
 		const newArr = [
 			...this.state.keywords.filter(x => x !== normalizedKeyword), 
 			normalizedKeyword
@@ -107,6 +109,13 @@ export default class MainContainer extends Component {
 		this.setState({
 			keywords: keywords
 		});
+	}
+
+	camelize(str) {
+    return str
+      .replace(/\s(.)/g, function($1) { return $1.toUpperCase(); })
+      .replace(/\s/g, '')
+      .replace(/^(.)/, function($1) { return $1.toLowerCase(); });
 	}
 
 	//-------------------------------------------------------------------------------------//

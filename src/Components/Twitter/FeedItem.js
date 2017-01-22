@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import Badge from 'material-ui/Badge';
-import IconButton from 'material-ui/IconButton';
-import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import ActionShare  from 'material-ui/svg-icons/social/share';
-import {grey400, blue500} from 'material-ui/styles/colors';
-import FontIcon from 'material-ui/FontIcon';
+import {grey400} from 'material-ui/styles/colors';
 
 const styles = {
   card: {
@@ -40,7 +37,7 @@ class FeedItem extends Component {
   	if(!this.props.tweet){
   		return;
   	}
-  	var {text, profileUrl, name, handle, retweets, favorites} = this.props.tweet;
+  	var {text, profileUrl, name, handle, retweets} = this.props.tweet;
 
     // Remove retweets
     text = text.replace(/RT\s/g, "");
