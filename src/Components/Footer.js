@@ -17,7 +17,7 @@ class Footer extends Component {
           <div className="col-xs-4">
           </div>
           <div className="col-xs-4">
-            <p style={styles.p}>&copy; 2017 Dream Team</p>
+            <p style={styles.p}>&copy; 2017 - 99% Precision Team</p>
           </div>
           <div className="col-xs-4">
           </div>

@@ -9,6 +9,7 @@ import KeywordFeed from './Components/Feeds/KeywordFeed';
 import TwitterLogin from './Components/Twitter/TwitterLogin';
 import TwitterLoginComplete from './Components/Twitter/TwitterLoginComplete';
 import TweetService from './Services/tweets';
+import HashTagFeed from './Components/Feeds/HashTagFeed';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -19,10 +20,15 @@ export default class MainContainer extends Component {
 		super(props);
 
 		this.state = { 
-			keywords: ["trump", "hilary"], 
+			keywords: ["WomansMarch", "Trump"],
+			hashtags: ["#WomansMarch", "#Trump"],
 			keywordsTweets: {positive:[], negative:[]}, 
+			hashtagTweets: {positive:[], negative:[]},
+			oppositeHandle: ["NotMyPresident", "TheResistance"],
+			relatedHandle: ["POTUS", "PresidentTrump", "NRA", "TrumpForPresident"],
 			antiTweets: [],
-			isLoading: false
+			isLoading: false,
+			lastWord: ""
 		};
 
 		this.addDefaultTweets = this.addDefaultTweets.bind(this);
@@ -30,6 +36,38 @@ export default class MainContainer extends Component {
 		this.removeKeyword = this.removeKeyword.bind(this);
 		this.doSearch = this.doSearch.bind(this);
 		this.resetLoading = this.resetLoading.bind(this);
+		this.setLoading = this.setLoading.bind(this);
+		this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
+		this.doSearchAgain = this.doSearchAgain.bind(this);
+		this.setLastWord = this.setLastWord.bind(this);
+		this.doHashtagSearch = this.doHashtagSearch.bind(this);
+		this.addHashtag = this.addHashtag.bind(this);
+		this.removeKeywordHashtag = this.removeKeywordHashtag.bind(this);
+	}
+
+	componentDidMount() {
+		this.setLastWord();
+		this.doHashtagSearch("#trump");
+	}
+
+	setLastWord() {
+		var keywordLength = this.state.keywords.length;
+
+		if(keywordLength > 0) {
+			var word = this.state.keywords[keywordLength - 1];
+			this.setState({lastWord: word}, this.doSearch(word));
+
+			console.log("keywords : " + this.state.keywords);
+			console.log("Last Word : " + word);
+		}
+	}
+
+	doSearchAgain() {
+		this.doSearch(this.state.lastWord);
+	}
+
+	setLoading() {
+		this.setState({isLoading: true});
 	}
 
 	resetLoading() {
@@ -73,11 +111,13 @@ export default class MainContainer extends Component {
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 		});
 
-		this.setState({keywordsTweets: {positive: newGoodTweets, negative: newBadTweets}}, () => {console.log(this.state.keywordsTweets)});
+		this.setState({keywordsTweets: {positive: newGoodTweets, negative: newBadTweets}});
 	}
 
 	doSearch(keyword) {
-		const normalizedKeyword = keyword.toLowerCase();
+		this.setLoading();
+		const normalizedKeyword = this.capitalizeFirstLetter(keyword);
+
 		const newArr = [
 			...this.state.keywords.filter(x => x !== normalizedKeyword), 
 			normalizedKeyword
@@ -88,10 +128,33 @@ export default class MainContainer extends Component {
 		TweetService
 			.searchByKeyword(normalizedKeyword)
 			.then(res => {
-				console.log(res);
 				this.setState({
 					keywordsTweets: res
 				});
+				this.resetLoading();
+			})
+	}
+
+	doHashtagSearch(hashtag) {
+		this.setLoading();
+
+		hashtag = this.addHashtag(hashtag);
+
+		const newArr = [
+			...this.state.hashtags.filter(x => x !== hashtag), 
+			hashtag
+		];
+		this.setState({
+			hashtags: newArr,
+		});
+
+		TweetService
+			.searchByHashtags(hashtag)
+			.then(res => {
+				this.setState({
+					hashtagTweets: res
+				});
+				this.resetLoading();
 			})
 	}
 
@@ -99,7 +162,22 @@ export default class MainContainer extends Component {
 		const keywords = [ ...this.state.keywords.slice(0, id), ...this.state.keywords.slice(id + 1) ]
 		this.setState({
 			keywords: keywords
-		});
+		}, this.setLastWord());
+	}
+
+	removeKeywordHashtag(id) {
+		const keywords = [ ...this.state.hashtags.slice(0, id), ...this.state.hashtags.slice(id + 1) ]
+		this.setState({
+			hashtags: keywords
+		}, this.setLastWord());
+	}
+
+	capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+	addHashtag(tag){
+		return tag.replace(/^(#?)/g, "#");
 	}
 
 	//-------------------------------------------------------------------------------------//
@@ -113,8 +191,10 @@ export default class MainContainer extends Component {
 						doSearch={this.doSearch} 
 						removeKeyword={this.removeKeyword}
 						tweets={this.state.keywordsTweets}
-						addDefaultTweets={this.addDefaultTweets}
-						isLoading={this.state.isLoading} />
+						addDefaultTweets={this.doSearchAgain}
+						isLoading={this.state.isLoading}
+						related={this.state.relatedHandle}
+						opposite={this.state.oppositeHandle} />
 					} />
 
 					<Route path='/anti-feed' component={() => 
@@ -122,8 +202,21 @@ export default class MainContainer extends Component {
 						history={browserHistory}
 						tweets={this.state.antiTweets} 
 						addDefaultTweet={this.addDefaultTweet}
-						isLoading={this.state.isLoading} />
+						isLoading={this.state.isLoading} 
+						related={this.state.relatedHandle}
+						opposite={this.state.oppositeHandle} />
 					}/>
+
+					<Route path='/hashtags' component={() => 
+						<HashTagFeed 
+						keywords={this.state.hashtags} 
+						doSearch={this.doHashtagSearch} 
+						removeKeyword={this.removeKeywordHashtag}
+						tweets={this.state.hashtagTweets}
+						addDefaultTweets={this.doSearchAgain}
+						isLoading={this.state.isLoading} />
+					}	/>
+
 					<Route path='/twitter-login' component={TwitterLogin} />
 					<Route path='/twitter-login-complete' 
 						   component={props => 

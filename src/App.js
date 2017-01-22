@@ -12,7 +12,6 @@ import './css/flexboxgrid.min.css';
 //ConUHacks2017!
 class App extends Component {
 	handleSelect(index, last) {
-    console.log('Selected tab: ' + index + ', Last tab: ' + last);
   }
 
   render() {

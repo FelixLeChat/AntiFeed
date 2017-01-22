@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import Badge from 'material-ui/Badge';
-import IconButton from 'material-ui/IconButton';
-import {Card, CardHeader, CardText, CardActions} from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import ActionShare  from 'material-ui/svg-icons/social/share';
-import {grey400, blue500} from 'material-ui/styles/colors';
-import FontIcon from 'material-ui/FontIcon';
+import {grey400} from 'material-ui/styles/colors';
 
 const styles = {
   card: {
@@ -30,6 +27,10 @@ const styles = {
     flexGrow: '1',
     flexDirection: 'row-reverse',
     alignItems: 'center',
+  },
+  tags : {
+    color: '#1da1f2',
+    fontWeight: 'bold'
   }
 };
 
@@ -40,14 +41,33 @@ class FeedItem extends Component {
   	if(!this.props.tweet){
   		return;
   	}
-  	var {text, profileUrl, name, handle, retweets, favorites} = this.props.tweet;
+  	var {text, profileUrl, name, handle, retweets, hashtags} = this.props.tweet;
 
-    text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold\">$1</span>");
+    if(text) {
+      // Remove retweets
+      text = text.replace(/RT\s/g, "");
+
+      // Add style to #
+      text = text.replace(/(#[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold;white-space:nowrap;\">$1</span>");
+
+      // Add style to @
+      text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold;white-space:nowrap;\">$1</span>");
+
+      // Add link to http
+      text = text.replace(/(https:\/\/[^\s]*)/g, "");
+      //text = text.replace(/(https:\/\/[^\s]*)/g, "<a href=\"$1\" target=\"_blank\">$1</a>");
+    }
+
+
+    var tags = hashtags.map((item, id) => <span style={styles.tags} id={id}>{'#' + item + ', '}</span>);
 
     return (
     	<Card style={styles.card}>
     		<CardHeader title={name} subtitle={"@" + handle} avatar={profileUrl} />
-        <CardText style={styles.cardText} dangerouslySetInnerHTML={{__html: text}} />
+        <CardText style={styles.cardText} dangerouslySetInnerHTML={{__html: '<p>' + text + '</p>'}} />
+        <CardText style={styles.cardText} >
+          {tags && tags.length > 0 && <p>{tags}</p>}
+        </CardText>
         <div style={styles.cardVal}>
           <div style={styles.cardInVal}>
             <ActionShare color={grey400}/>
