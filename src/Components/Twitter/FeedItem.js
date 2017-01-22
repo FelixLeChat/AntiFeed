@@ -43,18 +43,21 @@ class FeedItem extends Component {
   	}
   	var {text, profileUrl, name, handle, retweets, hashtags} = this.props.tweet;
 
-    // Remove retweets
-    text = text.replace(/RT\s/g, "");
+    if(text) {
+      // Remove retweets
+      text = text.replace(/RT\s/g, "");
 
-    // Add style to #
-    text = text.replace(/(#[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold;white-space:nowrap;\">$1</span>");
+      // Add style to #
+      text = text.replace(/(#[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold;white-space:nowrap;\">$1</span>");
 
-    // Add style to @
-    text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold;white-space:nowrap;\">$1</span>");
+      // Add style to @
+      text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold;white-space:nowrap;\">$1</span>");
 
-    // Add link to http
-    text = text.replace(/(https:\/\/[^\s]*)/g, "");
-    //text = text.replace(/(https:\/\/[^\s]*)/g, "<a href=\"$1\" target=\"_blank\">$1</a>");
+      // Add link to http
+      text = text.replace(/(https:\/\/[^\s]*)/g, "");
+      //text = text.replace(/(https:\/\/[^\s]*)/g, "<a href=\"$1\" target=\"_blank\">$1</a>");
+    }
+
 
     var tags = hashtags.map((item, id) => <span style={styles.tags} id={id}>{'#' + item + ', '}</span>);
 

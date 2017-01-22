@@ -46,6 +46,7 @@ export default class MainContainer extends Component {
 
 	componentDidMount() {
 		this.setLastWord();
+		this.doHashtagSearch("#trump");
 	}
 
 	setLastWord() {

@@ -24,6 +24,9 @@ const styles = {
 
 class HashTagFeed extends Component {
   render() {
+    this.props.tweets.positive = [].concat.apply([], this.props.tweets.positive);
+    this.props.tweets.negative = [].concat.apply([], this.props.tweets.negative);
+
     return (
     <div style={styles.container}>
       <div className="row center-xs">
@@ -45,13 +48,13 @@ class HashTagFeed extends Component {
 
       <div className="row center-xs">
         <div className="col-xs-4">
-          <h2>Side 1</h2>
+          <h2>Your bubble</h2>
           {!this.props.isLoading && this.props.tweets && this.props.tweets.positive && <div className="box">
             {this.props.tweets.positive && <FeedBox tweets={this.props.tweets.positive} />}
           </div>}
         </div>
         <div className="col-xs-4">
-          <h2>Side 2</h2>
+          <h2>The other side</h2>
           {!this.props.isLoading && this.props.tweets && this.props.tweets.negative && <div className="box">
             {this.props.tweets.negative && <FeedBox tweets={this.props.tweets.negative} />}
           </div>}
