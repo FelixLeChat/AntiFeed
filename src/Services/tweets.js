@@ -13,7 +13,7 @@ function searchByKeyword(keyword) {
     return fetch('/compare', {
       methode: 'POST',
       headers: jsonHeaders,
-      body: JSON.stringify({keyword}),
+      body: JSON.stringify({query:keyword}),
     })
     .then(json)
     .catch(err => console.log(err));

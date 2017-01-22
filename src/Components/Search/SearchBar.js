@@ -3,6 +3,7 @@ import Paper from 'material-ui/Paper';
 import Search from 'material-ui/svg-icons/action/search';
 import {grey300, blue500} from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
+import ourTheme from '../../Services/ourTheme';
 
 const styles = {
   input: {
@@ -63,7 +64,7 @@ class SearchBar extends Component {
     this.setState({
       currentValue: val,
       canSend,
-      searchColor: canSend ? blue500 : grey300,
+      searchColor: canSend ? ourTheme.palette.accent1Color : grey300,
     });
   }
 

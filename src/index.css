@@ -56,27 +56,3 @@ body {
 
 
 
-/* Color Scheme */
-
-/******************** HEADER ************************/
-.header > div {
-  background-color: #333333 !important;
-}
-.header > div > div > div {
-  background-color: #333333 !important;
-}
-
-/******************** BODY **************************/
-body {
-  background-color: #FAFAFA !important;
-}
-
-/******************** BUTTON ************************/
-button {
-  background-color: #333333 !important;  
-}
-
-/******************** LOGO **************************/
-.logo > span > svg {
-  fill: white !important;
-}
