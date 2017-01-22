@@ -30,7 +30,7 @@ export default class MainContainer extends Component {
 		this.doSearch = this.doSearch.bind(this);
 		this.resetLoading = this.resetLoading.bind(this);
 		this.setLoading = this.setLoading.bind(this);
-		this.camelize = this.camelize.bind(this);
+		this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
 	}
 
 	setLoading() {
@@ -85,7 +85,9 @@ export default class MainContainer extends Component {
 
 		this.setLoading();
 
-		const normalizedKeyword = this.camelize(keyword);
+		console.log(keyword);
+		const normalizedKeyword = this.capitalizeFirstLetter(keyword);
+		console.log(normalizedKeyword);
 
 		const newArr = [
 			...this.state.keywords.filter(x => x !== normalizedKeyword), 
@@ -111,11 +113,8 @@ export default class MainContainer extends Component {
 		});
 	}
 
-	camelize(str) {
-    return str
-      .replace(/\s(.)/g, function($1) { return $1.toUpperCase(); })
-      .replace(/\s/g, '')
-      .replace(/^(.)/, function($1) { return $1.toLowerCase(); });
+	capitalizeFirstLetter(string) {
+	    return string.charAt(0).toUpperCase() + string.slice(1);
 	}
 
 	//-------------------------------------------------------------------------------------//
