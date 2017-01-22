@@ -6,6 +6,7 @@ import './index.css';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import AntiFeed from './Components/Feeds/AntiFeed';
 import KeywordFeed from './Components/Feeds/KeywordFeed';
+import TwitterLogin from './Components/Twitter/TwitterLogin';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -81,7 +82,8 @@ export default class MainContainer extends Component {
 			<Router history={browserHistory}>
 				<Route path="/" component={App}>
 					<IndexRoute component={() => <KeywordFeed keywords={this.state.keywords} doSearch={this.doSearch} removeKeyword={this.removeKeyword} />} />
-					<Route path='/anti-feed' component={() => <AntiFeed tweets={this.state.antiTweets} addDefaultTweet={this.addDefaultTweet} />}/>
+					<Route path='/anti-feed' component={() => <AntiFeed history={browserHistory} tweets={this.state.antiTweets} addDefaultTweet={this.addDefaultTweet} />}/>
+					<Route path='/twitter-login' component={TwitterLogin} />
 				</Route>
 			</Router>
     );
