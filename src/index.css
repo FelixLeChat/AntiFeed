@@ -84,3 +84,7 @@ body {
 .keywords > div:first-of-type > div:last-child {
   background-color: #CF6766 !important;
 }
+
+span {
+  white-space: nowrap !important;
+}

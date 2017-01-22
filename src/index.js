@@ -18,7 +18,7 @@ export default class MainContainer extends Component {
 		super(props);
 
 		this.state = { 
-			keywords: ["Trump", "Hilary"], 
+			keywords: ["WomansMarch", "TheResistance", "NRA", "NotMyPresident", "Trump"], 
 			keywordsTweets: {positive:[], negative:[]}, 
 			antiTweets: [],
 			isLoading: false,

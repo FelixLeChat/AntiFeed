@@ -27,6 +27,10 @@ const styles = {
     flexGrow: '1',
     flexDirection: 'row-reverse',
     alignItems: 'center',
+  },
+  tags : {
+    color: '#1da1f2',
+    fontWeight: 'bold'
   }
 };
 
@@ -37,10 +41,14 @@ class FeedItem extends Component {
   	if(!this.props.tweet){
   		return;
   	}
-  	var {text, profileUrl, name, handle, retweets} = this.props.tweet;
+  	var {text, profileUrl, name, handle, retweets, hashtags} = this.props.tweet;
 
+    text = '<p>' + text + '</p>';
     // Remove retweets
     text = text.replace(/RT\s/g, "");
+
+    // Add style to #
+    text = text.replace(/(#[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold;white-space:nowrap;\">$1</span>");
 
     // Add style to @
     text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold;white-space:nowrap;\">$1</span>");
@@ -49,10 +57,15 @@ class FeedItem extends Component {
     text = text.replace(/(https:\/\/[^\s]*)/g, "");
     //text = text.replace(/(https:\/\/[^\s]*)/g, "<a href=\"$1\" target=\"_blank\">$1</a>");
 
+    var tags = hashtags.map((item, id) => <span style={styles.tags} id={id}>{'#' + item + ', '}</span>);
+
     return (
     	<Card style={styles.card}>
     		<CardHeader title={name} subtitle={"@" + handle} avatar={profileUrl} />
         <CardText style={styles.cardText} dangerouslySetInnerHTML={{__html: text}} />
+        <CardText style={styles.cardText} >
+          {tags && tags.length > 0 && <p>{tags}</p>}
+        </CardText>
         <div style={styles.cardVal}>
           <div style={styles.cardInVal}>
             <ActionShare color={grey400}/>
