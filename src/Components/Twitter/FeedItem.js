@@ -43,7 +43,7 @@ class FeedItem extends Component {
     text = text.replace(/RT\s/g, "");
 
     // Add style to @
-    text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold\">$1</span>");
+    text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold;white-space:nowrap;\">$1</span>");
 
     // Add link to http
     text = text.replace(/(https:\/\/[^\s]*)/g, "");

@@ -21,7 +21,8 @@ export default class MainContainer extends Component {
 			keywords: ["Trump", "Hilary"], 
 			keywordsTweets: {positive:[], negative:[]}, 
 			antiTweets: [],
-			isLoading: false
+			isLoading: false,
+			lastWord: ""
 		};
 
 		this.addDefaultTweets = this.addDefaultTweets.bind(this);
@@ -31,6 +32,20 @@ export default class MainContainer extends Component {
 		this.resetLoading = this.resetLoading.bind(this);
 		this.setLoading = this.setLoading.bind(this);
 		this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
+		this.doSearchAgain = this.doSearchAgain.bind(this);
+	}
+
+	componentDidMount() {
+		var keywordLength = this.state.keywords.length;
+
+		if(keywordLength > 0) {
+			var word = this.state.keywords[keywordLength - 1];
+			this.setState({lastWord: word}, this.doSearch(word));
+		}
+	}
+
+	doSearchAgain() {
+		this.doSearch(this.state.lastWord);
 	}
 
 	setLoading() {
@@ -128,7 +143,7 @@ export default class MainContainer extends Component {
 						doSearch={this.doSearch} 
 						removeKeyword={this.removeKeyword}
 						tweets={this.state.keywordsTweets}
-						addDefaultTweets={this.addDefaultTweets}
+						addDefaultTweets={this.doSearchAgain}
 						isLoading={this.state.isLoading} />
 					} />
 
