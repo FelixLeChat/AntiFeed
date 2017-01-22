@@ -20,6 +20,8 @@ export default class MainContainer extends Component {
 		this.state = { 
 			keywords: ["WomansMarch", "TheResistance", "NRA", "NotMyPresident", "Trump"], 
 			keywordsTweets: {positive:[], negative:[]}, 
+			oppositeHandle: [],
+			relatedHandle: [],
 			antiTweets: [],
 			isLoading: false,
 			lastWord: ""
