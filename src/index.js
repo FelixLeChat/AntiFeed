@@ -7,6 +7,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import AntiFeed from './Components/Feeds/AntiFeed';
 import KeywordFeed from './Components/Feeds/KeywordFeed';
 import TwitterLogin from './Components/Twitter/TwitterLogin';
+import TwitterLoginComplete from './Components/Twitter/TwitterLoginComplete';
 import TweetService from './Services/tweets';
 
 // Needed for onTouchTap
@@ -124,6 +125,10 @@ export default class MainContainer extends Component {
 						isLoading={this.state.isLoading} />
 					}/>
 					<Route path='/twitter-login' component={TwitterLogin} />
+					<Route path='/twitter-login-complete' 
+						   component={props => 
+							   <TwitterLoginComplete {...props} history={browserHistory}/>
+						   }/>
 				</Route>
 			</Router>
     );

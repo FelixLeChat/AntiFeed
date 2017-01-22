@@ -11,14 +11,18 @@ const style = {
 };
 
 class AntiFeed extends Component {
-	componentWillMount() {
-    const id = cookie.load('connect.cid');
-		console.log(id);
-  }
 	constructor(props) {
 		super(props);
+		this.state = {
+			tweets: []
+		};
 		TweetService
 			.searchByUser()
+			.then(res => {
+				this.setState({
+					tweets: res
+				});
+			})
 			.catch(() => {
 				console.log('catch');
 				this.props.history.push('/twitter-login');
@@ -38,7 +42,7 @@ class AntiFeed extends Component {
             </div>}
             
       			{!this.props.isLoading && <div className="box">
-							{this.props.tweets && <FeedBox tweets={this.props.tweets} />}
+							{this.state.tweets && <FeedBox tweets={this.state.tweets} />}
 						</div>}
             
 					</div>
