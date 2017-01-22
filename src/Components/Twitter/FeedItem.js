@@ -41,9 +41,9 @@ class FeedItem extends Component {
   	if(!this.props.tweet){
   		return;
   	}
-  	var {text, profileUrl, name, handle, retweets, hashtags} = this.props.tweet;
+  	var {text, profileUrl, name, handle, retweets, hashtags, sentiment} = this.props.tweet;
 
-    if(text) {
+    if(text !== undefined) {
       // Remove retweets
       text = text.replace(/RT\s/g, "");
 
@@ -65,15 +65,22 @@ class FeedItem extends Component {
     	<Card style={styles.card}>
     		<CardHeader title={name} subtitle={"@" + handle} avatar={profileUrl} />
         <CardText style={styles.cardText} dangerouslySetInnerHTML={{__html: '<p>' + text + '</p>'}} />
+
         <CardText style={styles.cardText} >
           {tags && tags.length > 0 && <p>{tags}</p>}
         </CardText>
+
+        {sentiment && <CardText style={styles.cardText} >
+          <p>{'Sentiment : ' + sentiment}</p>
+        </CardText>}
+
         <div style={styles.cardVal}>
           <div style={styles.cardInVal}>
             <ActionShare color={grey400}/>
             <div style={{marginRight: '5px'}}>{retweets}</div>
           </div>
         </div>
+
   		</Card>
     );
   }
