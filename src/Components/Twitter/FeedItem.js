@@ -23,7 +23,15 @@ class FeedItem extends Component {
   	}
   	var {text, profileUrl, name, handle, retweets, favorites} = this.props.tweet;
 
+    // Remove retweets
+    text = text.replace(/RT\s/g, "");
+
+    // Add style to @
     text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold\">$1</span>");
+
+    // Add link to http
+    text = text.replace(/(https:\/\/[^\s]*)/g, "");
+    //text = text.replace(/(https:\/\/[^\s]*)/g, "<a href=\"$1\" target=\"_blank\">$1</a>");
 
     return (
     	<Card style={styles.card}>

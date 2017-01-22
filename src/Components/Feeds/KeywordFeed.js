@@ -3,6 +3,7 @@ import FeedBox from '../Twitter/FeedBox';
 import SearchBar from '../Search/SearchBar';
 import RecentlyUsed from '../Search/RecentlyUsed';
 import RaisedButton from 'material-ui/RaisedButton';
+import Loading from '../Loading/Loading';
 
 const styles = {
 	searchBarContainer: {
@@ -45,18 +46,23 @@ class KeywordFeed extends Component {
 			<div className="row center-xs">
 				<div className="col-xs-4">
 					<h2>"Pros" Feed</h2>
-    			<div className="box">
+    			{!this.props.isLoading && <div className="box">
 						{this.props.tweets.positive && <FeedBox tweets={this.props.tweets.positive} />}
-					</div>
+					</div>}
 				</div>
 				<div className="col-xs-4">
 					<h2>"Cons" Feed</h2>
-    			<div className="box">
+    			{!this.props.isLoading && <div className="box">
 						{this.props.tweets.negative && <FeedBox tweets={this.props.tweets.negative} />}
-					</div>
+					</div>}
 				</div>
 			</div>
 
+			<div className="row center-xs">
+				<div className="col-xs-4">
+					{this.props.isLoading && <Loading />}
+				</div>
+			</div>
 
 		</div>
     );

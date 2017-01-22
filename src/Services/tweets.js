@@ -21,8 +21,7 @@ function searchByUser() {
     return fetch('/api/feed', {
       credentials: 'include'
     })
-    .then(res => {
-      console.log(res);
+    .then(res => {;
       if (res.status === 403) {
         console.log('reject');
         return Promise.reject('need auth');

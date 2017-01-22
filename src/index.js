@@ -29,6 +29,11 @@ export default class MainContainer extends Component {
 		this.removeKeyword = this.removeKeyword.bind(this);
 		this.doSearch = this.doSearch.bind(this);
 		this.resetLoading = this.resetLoading.bind(this);
+		this.setLoading = this.setLoading.bind(this);
+	}
+
+	setLoading() {
+		this.setState({isLoading: true});
 	}
 
 	resetLoading() {
@@ -72,10 +77,13 @@ export default class MainContainer extends Component {
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 		});
 
-		this.setState({keywordsTweets: {positive: newGoodTweets, negative: newBadTweets}}, () => {console.log(this.state.keywordsTweets)});
+		this.setState({keywordsTweets: {positive: newGoodTweets, negative: newBadTweets}});
 	}
 
 	doSearch(keyword) {
+
+		this.setLoading();
+
 		const normalizedKeyword = keyword.toLowerCase();
 		const newArr = [
 			...this.state.keywords.filter(x => x !== normalizedKeyword), 
@@ -87,10 +95,10 @@ export default class MainContainer extends Component {
 		TweetService
 			.searchByKeyword(normalizedKeyword)
 			.then(res => {
-				console.log(res);
 				this.setState({
 					keywordsTweets: res
 				});
+				this.resetLoading();
 			})
 	}
 
