@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FeedBox from '../Twitter/FeedBox';
 import SearchBar from '../Search/SearchBar';
 import RecentlyUsed from '../Search/RecentlyUsed';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -29,6 +30,19 @@ class KeywordFeed extends Component {
 					<RecentlyUsed keywords={this.props.keywords} search={this.props.doSearch} removeKeyword={this.props.removeKeyword} />
 					<div style={styles.searchBarContainer}>
 						<SearchBar search={this.props.doSearch}/>
+					</div>
+				</div>
+			</div>
+
+			<div className="row center-xs">
+				<div className="col-xs-4">
+    			<div className="box">
+						{this.props.tweets.good && <FeedBox tweets={this.props.tweets.good} />}
+					</div>
+				</div>
+				<div className="col-xs-4">
+    			<div className="box">
+						{this.props.tweets.bad && <FeedBox tweets={this.props.tweets.bad} />}
 					</div>
 				</div>
 			</div>
