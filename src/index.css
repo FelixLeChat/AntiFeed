@@ -35,6 +35,9 @@ body {
 .center-button {
 	text-align: center;
 }
+.right-button {
+  text-align: right;
+}
 
 .header {
   position: fixed;

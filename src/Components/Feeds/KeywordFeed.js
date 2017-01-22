@@ -35,6 +35,14 @@ class KeywordFeed extends Component {
 			</div>
 
 			<div className="row center-xs">
+				<div className="col-xs-8">
+					<div className="right-button">
+						<RaisedButton label="Refresh Feed" primary={true} style={styles.button} onClick={this.props.addDefaultTweets} />
+					</div>
+				</div>
+			</div>
+
+			<div className="row center-xs">
 				<div className="col-xs-4">
 					<h2>"Pros" Feed</h2>
     			<div className="box">
@@ -49,9 +57,7 @@ class KeywordFeed extends Component {
 				</div>
 			</div>
 
-			<div className="center-button">
-				<RaisedButton label="Refresh Feed" primary={true} style={styles.button} onClick={this.props.addDefaultTweets} />
-			</div>
+
 		</div>
     );
   }

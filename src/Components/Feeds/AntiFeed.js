@@ -13,15 +13,18 @@ class AntiFeed extends Component {
 			<div className="anti-feed">
 				<div className="row center-xs">
 					<div className="col-xs-8">
+            <h2>Your personnalized Anti Feed</h2>
+            <div className="right-button">
+              <RaisedButton label="Refresh Feed" primary={true} style={style} onClick={this.props.addDefaultTweet} />
+            </div>
+            
       			<div className="box">
 							{this.props.tweets && <FeedBox tweets={this.props.tweets} />}
 						</div>
 					</div>
 				</div>
 
-				<div className="center-button">
-					<RaisedButton label="Refresh Feed" primary={true} style={style} onClick={this.props.addDefaultTweet} />
-				</div>
+
 
 			</div>
     );
