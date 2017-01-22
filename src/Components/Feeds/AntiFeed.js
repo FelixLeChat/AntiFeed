@@ -14,13 +14,15 @@ class AntiFeed extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			tweets: []
+			tweets: [],
+      isLoading: true
 		};
 		TweetService
 			.searchByUser()
 			.then(res => {
 				this.setState({
-					tweets: res
+					tweets: res,
+          isLoading: false
 				});
 			})
 			.catch(() => {
@@ -28,6 +30,7 @@ class AntiFeed extends Component {
 				this.props.history.push('/twitter-login');
 			})
 	}
+  
   render() {
     return (
 			<div className="anti-feed">
@@ -35,13 +38,9 @@ class AntiFeed extends Component {
 					<div className="col-xs-8">
             <h2>Your personnalized Anti Feed</h2>
 
-            {this.props.isLoading && <Loading />}
-
-            {!this.props.isLoading && <div className="right-button main-button">
-              <RaisedButton label="Refresh Feed" primary={true} style={style} onClick={this.props.addDefaultTweet} />
-            </div>}
+            {this.state.isLoading && <Loading />}
             
-      			{!this.props.isLoading && <div className="box">
+      			{!this.state.isLoading && <div className="box">
 							{this.state.tweets && <FeedBox tweets={this.state.tweets} />}
 						</div>}
             
