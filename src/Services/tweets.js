@@ -17,6 +17,16 @@ function searchByKeyword(keyword) {
     .catch(err => console.log(err));
 }
 
+function searchByHashtags(hashtag) {
+    return fetch('/api/bubble', {
+      method: 'post',
+      headers: jsonHeaders,
+      body: JSON.stringify({query:hashtag}),
+    })
+    .then(json)
+    .catch(err => console.log(err));
+}
+
 function searchByUser() {
     return fetch('/api/feed', {
       credentials: 'include'
@@ -32,4 +42,5 @@ function searchByUser() {
 module.exports = {
   searchByUser,
   searchByKeyword,
+  searchByHashtags
 }

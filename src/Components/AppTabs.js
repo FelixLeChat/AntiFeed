@@ -15,8 +15,9 @@ class AppTabs extends Component {
   render() {
     return (
 		<Tabs style={style} value={this.props.location.pathname}>
-			<Tab value="/" label="Keyword Feed" containerElement={<Link to="/"></Link>} onClick={this.scrollToTop} />
-	    <Tab value="/anti-feed" label="Anti Feed" containerElement={<Link to="/anti-feed"></Link>} onClick={this.scrollToTop} />
+			<Tab value="/" label="Keyword Search" containerElement={<Link to="/"></Link>} onClick={this.scrollToTop} />
+      <Tab value="/hashtags" label="Hashtags Search" containerElement={<Link to="/hashtags"></Link>} onClick={this.scrollToTop} />
+      <Tab value="/anti-feed" label="Anti Feed" containerElement={<Link to="/anti-feed"></Link>} onClick={this.scrollToTop} />
 	  </Tabs>
     );
   }

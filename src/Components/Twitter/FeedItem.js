@@ -43,7 +43,6 @@ class FeedItem extends Component {
   	}
   	var {text, profileUrl, name, handle, retweets, hashtags} = this.props.tweet;
 
-    text = '<p>' + text + '</p>';
     // Remove retweets
     text = text.replace(/RT\s/g, "");
 
@@ -62,7 +61,7 @@ class FeedItem extends Component {
     return (
     	<Card style={styles.card}>
     		<CardHeader title={name} subtitle={"@" + handle} avatar={profileUrl} />
-        <CardText style={styles.cardText} dangerouslySetInnerHTML={{__html: text}} />
+        <CardText style={styles.cardText} dangerouslySetInnerHTML={{__html: '<p>' + text + '</p>'}} />
         <CardText style={styles.cardText} >
           {tags && tags.length > 0 && <p>{tags}</p>}
         </CardText>

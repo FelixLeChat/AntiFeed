@@ -44,6 +44,17 @@ class KeywordFeed extends Component {
 			</div>
 
 			<div className="row center-xs">
+				{this.props.related && this.props.related.length > 0 && <div className="col-xs-4">
+			 		<h3>Related</h3>
+					<p>{this.props.related.map((item, id) => <span id={id}>{item + ", "}</span>)}</p>
+				</div>}
+				{this.props.opposite && this.props.opposite.length > 0 &&	<div className="col-xs-4">
+					<h3>Opposite</h3>
+					<p>{this.props.opposite.map((item, id) => <span id={id}>{item + ", "}</span>)}</p>
+				</div>}
+			</div>
+
+			<div className="row center-xs">
 				<div className="col-xs-4">
 					<h2>"Pros" Feed</h2>
     			{!this.props.isLoading && <div className="box">

@@ -8,6 +8,7 @@ import AntiFeed from './Components/Feeds/AntiFeed';
 import KeywordFeed from './Components/Feeds/KeywordFeed';
 import TwitterLogin from './Components/Twitter/TwitterLogin';
 import TweetService from './Services/tweets';
+import HashTagFeed from './Components/Feeds/HashTagFeed';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -18,10 +19,12 @@ export default class MainContainer extends Component {
 		super(props);
 
 		this.state = { 
-			keywords: ["WomansMarch", "TheResistance", "NRA", "NotMyPresident", "Trump"], 
+			keywords: ["WomansMarch", "Trump"],
+			hashtags: ["#WomansMarch", "#Trump"],
 			keywordsTweets: {positive:[], negative:[]}, 
-			oppositeHandle: [],
-			relatedHandle: [],
+			hashtagTweets: {positive:[], negative:[]},
+			oppositeHandle: ["NotMyPresident", "TheResistance"],
+			relatedHandle: ["POTUS", "PresidentTrump", "NRA"],
 			antiTweets: [],
 			isLoading: false,
 			lastWord: ""
@@ -35,14 +38,25 @@ export default class MainContainer extends Component {
 		this.setLoading = this.setLoading.bind(this);
 		this.capitalizeFirstLetter = this.capitalizeFirstLetter.bind(this);
 		this.doSearchAgain = this.doSearchAgain.bind(this);
+		this.setLastWord = this.setLastWord.bind(this);
+		this.doHashtagSearch = this.doHashtagSearch.bind(this);
+		this.addHashtag = this.addHashtag.bind(this);
+		this.removeKeywordHashtag = this.removeKeywordHashtag.bind(this);
 	}
 
 	componentDidMount() {
+		this.setLastWord();
+	}
+
+	setLastWord() {
 		var keywordLength = this.state.keywords.length;
 
 		if(keywordLength > 0) {
 			var word = this.state.keywords[keywordLength - 1];
 			this.setState({lastWord: word}, this.doSearch(word));
+
+			console.log("keywords : " + this.state.keywords);
+			console.log("Last Word : " + word);
 		}
 	}
 
@@ -99,12 +113,8 @@ export default class MainContainer extends Component {
 	}
 
 	doSearch(keyword) {
-
 		this.setLoading();
-
-		console.log(keyword);
 		const normalizedKeyword = this.capitalizeFirstLetter(keyword);
-		console.log(normalizedKeyword);
 
 		const newArr = [
 			...this.state.keywords.filter(x => x !== normalizedKeyword), 
@@ -123,15 +133,49 @@ export default class MainContainer extends Component {
 			})
 	}
 
+	doHashtagSearch(hashtag) {
+		this.setLoading();
+
+		hashtag = this.addHashtag(hashtag);
+
+		const newArr = [
+			...this.state.hashtags.filter(x => x !== hashtag), 
+			hashtag
+		];
+		this.setState({
+			hashtags: newArr,
+		});
+
+		TweetService
+			.searchByHashtags(hashtag)
+			.then(res => {
+				this.setState({
+					hashtagTweets: res
+				});
+				this.resetLoading();
+			})
+	}
+
 	removeKeyword(id) {
 		const keywords = [ ...this.state.keywords.slice(0, id), ...this.state.keywords.slice(id + 1) ]
 		this.setState({
 			keywords: keywords
-		});
+		}, this.setLastWord());
+	}
+
+	removeKeywordHashtag(id) {
+		const keywords = [ ...this.state.hashtags.slice(0, id), ...this.state.hashtags.slice(id + 1) ]
+		this.setState({
+			hashtags: keywords
+		}, this.setLastWord());
 	}
 
 	capitalizeFirstLetter(string) {
-	    return string.charAt(0).toUpperCase() + string.slice(1);
+    return string.charAt(0).toUpperCase() + string.slice(1);
+	}
+
+	addHashtag(tag){
+		return tag.replace(/^(#?)/g, "#");
 	}
 
 	//-------------------------------------------------------------------------------------//
@@ -146,7 +190,9 @@ export default class MainContainer extends Component {
 						removeKeyword={this.removeKeyword}
 						tweets={this.state.keywordsTweets}
 						addDefaultTweets={this.doSearchAgain}
-						isLoading={this.state.isLoading} />
+						isLoading={this.state.isLoading}
+						related={this.state.relatedHandle}
+						opposite={this.state.oppositeHandle} />
 					} />
 
 					<Route path='/anti-feed' component={() => 
@@ -154,8 +200,21 @@ export default class MainContainer extends Component {
 						history={browserHistory}
 						tweets={this.state.antiTweets} 
 						addDefaultTweet={this.addDefaultTweet}
-						isLoading={this.state.isLoading} />
+						isLoading={this.state.isLoading} 
+						related={this.state.relatedHandle}
+						opposite={this.state.oppositeHandle} />
 					}/>
+
+					<Route path='/hashtags' component={() => 
+						<HashTagFeed 
+						keywords={this.state.hashtags} 
+						doSearch={this.doHashtagSearch} 
+						removeKeyword={this.removeKeywordHashtag}
+						tweets={this.state.hashtagTweets}
+						addDefaultTweets={this.doSearchAgain}
+						isLoading={this.state.isLoading} />
+					}	/>
+
 					<Route path='/twitter-login' component={TwitterLogin} />
 				</Route>
 			</Router>
