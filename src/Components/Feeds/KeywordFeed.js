@@ -36,11 +36,13 @@ class KeywordFeed extends Component {
 
 			<div className="row center-xs">
 				<div className="col-xs-4">
+					<h2>"Pros" Feed</h2>
     			<div className="box">
 						{this.props.tweets.good && <FeedBox tweets={this.props.tweets.good} />}
 					</div>
 				</div>
 				<div className="col-xs-4">
+					<h2>"Cons" Feed</h2>
     			<div className="box">
 						{this.props.tweets.bad && <FeedBox tweets={this.props.tweets.bad} />}
 					</div>
