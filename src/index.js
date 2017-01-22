@@ -15,12 +15,26 @@ export default class MainContainer extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { keywords: ["trump", "hilary"], keywordsTweets: {good:[], bad:[]}, antiTweets: []};
+		this.state = { 
+			keywords: ["trump", "hilary"], 
+			keywordsTweets: {good:[], bad:[]}, 
+			antiTweets: [],
+			isLoading: true
+		};
 
 		this.addDefaultTweets = this.addDefaultTweets.bind(this);
 		this.addDefaultTweet = this.addDefaultTweet.bind(this);
 		this.removeKeyword = this.removeKeyword.bind(this);
 		this.doSearch = this.doSearch.bind(this);
+		this.resetLoading = this.resetLoading.bind(this);
+	}
+
+	componentDidMount() {
+		setTimeout(this.resetLoading() , 10000);
+	}
+
+	resetLoading() {
+		this.setState({isLoading: false});
 	}
 
 	//-------------------------------- Anti Feed --------------------------------------//
@@ -86,13 +100,15 @@ export default class MainContainer extends Component {
 						doSearch={this.doSearch} 
 						removeKeyword={this.removeKeyword}
 						tweets={this.state.keywordsTweets}
-						addDefaultTweets={this.addDefaultTweets} />
+						addDefaultTweets={this.addDefaultTweets}
+						isLoading={this.state.isLoading} />
 					} />
 
 					<Route path='/anti-feed' component={() => 
 						<AntiFeed 
 						tweets={this.state.antiTweets} 
-						addDefaultTweet={this.addDefaultTweet} />
+						addDefaultTweet={this.addDefaultTweet}
+						isLoading={this.state.isLoading} />
 					}/>
 
 				</Route>
