@@ -83,8 +83,7 @@ export default class MainContainer extends Component {
 		];
 		this.setState({
 			keywords: newArr,
-		});
-		
+		});	
 	}
 
 	removeKeyword(id) {
