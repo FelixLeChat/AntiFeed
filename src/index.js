@@ -41,7 +41,7 @@ export default class MainContainer extends Component {
 	addDefaultTweets() {
 		var newGoodTweets = this.state.keywordsTweets.good;
 		newGoodTweets.push({
-			name: "Felix - good",
+			name: "Felix - GOOD",
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
@@ -49,13 +49,13 @@ export default class MainContainer extends Component {
 
 		var newBadTweets = this.state.keywordsTweets.bad;
 		newBadTweets.push({
-			name: "Felix - good",
+			name: "Felix - BAD",
 			handler: "@felixlechat",
 			text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 		});
 
-		this.setState({keywordsTweets: {good: newGoodTweets, bad: newBadTweets}});
+		this.setState({keywordsTweets: {good: newGoodTweets, bad: newBadTweets}}, () => {console.log(this.state.keywordsTweets)});
 	}
 
 	doSearch(keyword) {
@@ -81,8 +81,21 @@ export default class MainContainer extends Component {
     return (
 			<Router history={browserHistory}>
 				<Route path="/" component={App}>
-					<IndexRoute component={() => <KeywordFeed keywords={this.state.keywords} doSearch={this.doSearch} removeKeyword={this.removeKeyword} />} />
-					<Route path='/anti-feed' component={() => <AntiFeed history={browserHistory} tweets={this.state.antiTweets} addDefaultTweet={this.addDefaultTweet} />}/>
+					<IndexRoute component={() => 
+						<KeywordFeed 
+						keywords={this.state.keywords} 
+						doSearch={this.doSearch} 
+						removeKeyword={this.removeKeyword}
+						tweets={this.state.keywordsTweets}
+						addDefaultTweets={this.addDefaultTweets} />
+					} />
+
+					<Route path='/anti-feed' component={() => 
+						<AntiFeed
+						history={browserHistory}
+						tweets={this.state.antiTweets} 
+						addDefaultTweet={this.addDefaultTweet} />
+					}/>
 					<Route path='/twitter-login' component={TwitterLogin} />
 				</Route>
 			</Router>

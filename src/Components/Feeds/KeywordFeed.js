@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FeedBox from '../Twitter/FeedBox';
 import SearchBar from '../Search/SearchBar';
 import RecentlyUsed from '../Search/RecentlyUsed';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -33,9 +34,30 @@ class KeywordFeed extends Component {
 				</div>
 			</div>
 
-			<div className="center-button">
-				<RaisedButton label="Refresh Feed" primary={true} style={styles.button} onClick={this.props.addDefaultTweets} />
+			<div className="row center-xs">
+				<div className="col-xs-8">
+					<div className="right-button">
+						<RaisedButton label="Refresh Feed" primary={true} style={styles.button} onClick={this.props.addDefaultTweets} />
+					</div>
+				</div>
 			</div>
+
+			<div className="row center-xs">
+				<div className="col-xs-4">
+					<h2>"Pros" Feed</h2>
+    			<div className="box">
+						{this.props.tweets.good && <FeedBox tweets={this.props.tweets.good} />}
+					</div>
+				</div>
+				<div className="col-xs-4">
+					<h2>"Cons" Feed</h2>
+    			<div className="box">
+						{this.props.tweets.bad && <FeedBox tweets={this.props.tweets.bad} />}
+					</div>
+				</div>
+			</div>
+
+
 		</div>
     );
   }
