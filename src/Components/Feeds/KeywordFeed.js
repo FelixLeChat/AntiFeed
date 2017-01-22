@@ -27,7 +27,7 @@ class KeywordFeed extends Component {
     return (
 		<div style={styles.container}>
 			<div className="row center-xs">
-				<div className="col-xs-8">
+				<div className="col-xs-8 keywords">
 					<RecentlyUsed keywords={this.props.keywords} search={this.props.doSearch} removeKeyword={this.props.removeKeyword} />
 					<div style={styles.searchBarContainer}>
 						<SearchBar search={this.props.doSearch}/>

@@ -80,3 +80,7 @@ body {
 .logo > span > svg {
   fill: white !important;
 }
+
+.keywords > div:first-of-type > div:last-child {
+  background-color: #CF6766 !important;
+}
