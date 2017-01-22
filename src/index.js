@@ -84,6 +84,14 @@ export default class MainContainer extends Component {
 		this.setState({
 			keywords: newArr,
 		});
+		TweetService
+			.searchByKeyword(normalizedKeyword)
+			.then(res => {
+				console.log(res);
+				this.setState({
+					keywordsTweets: res
+				});
+			})
 		
 	}
 

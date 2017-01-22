@@ -11,7 +11,7 @@ function json(res) {
 
 function searchByKeyword(keyword) {
     return fetch('/compare', {
-      methode: 'POST',
+      method: 'post',
       headers: jsonHeaders,
       body: JSON.stringify({query:keyword}),
     })
