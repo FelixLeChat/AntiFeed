@@ -13,7 +13,6 @@ const style = {
 class AntiFeed extends Component {
 	componentWillMount() {
     const id = cookie.load('connect.cid');
-		console.log(id);
   }
 	constructor(props) {
 		super(props);
