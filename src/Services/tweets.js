@@ -1,5 +1,3 @@
-
-
 const jsonHeaders = {
   'Accept': 'application/json',
   'Content-Type': 'application/json',
@@ -10,7 +8,7 @@ function json(res) {
 }
 
 function searchByKeyword(keyword) {
-    return fetch('/compare', {
+    return fetch('/api/compare', {
       method: 'post',
       headers: jsonHeaders,
       body: JSON.stringify({query:keyword}),
@@ -20,7 +18,7 @@ function searchByKeyword(keyword) {
 }
 
 function searchByUser() {
-    return fetch('/feed', {
+    return fetch('/api/feed', {
       credentials: 'include'
     })
     .then(res => {

@@ -23,13 +23,13 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     color: grey400,
+    padding: '0 16px 16px 16px',
   },
   cardInVal: {
     display: 'flex',
     flexGrow: '1',
     flexDirection: 'row-reverse',
     alignItems: 'center',
-    width: '120px',
   }
 };
 
@@ -40,20 +40,20 @@ class FeedItem extends Component {
   	if(!this.props.tweet){
   		return;
   	}
-  	var {text, profileUrl, name, handler, retweets, favorites} = this.props.tweet;
+  	var {text, profileUrl, name, handle, retweets, favorites} = this.props.tweet;
+
+    text = text.replace(/(@[^\s]*)/g, "<span style=\"color:#1da1f2;font-weight:bold\">$1</span>");
 
     return (
     	<Card style={styles.card}>
-    		<CardHeader title={name} subtitle={handler} avatar={profileUrl} />
-		    <CardText style={styles.cardText}>
-          <div>{text}</div>
-          <div style={styles.cardVal}>
-            <div style={styles.cardInVal}>
-              <ActionShare color={grey400}/>
-              <div style={{marginRight: '5px'}}>{retweets}</div>
-            </div>
+    		<CardHeader title={name} subtitle={"@" + handle} avatar={profileUrl} />
+        <CardText style={styles.cardText} dangerouslySetInnerHTML={{__html: text}} />
+        <div style={styles.cardVal}>
+          <div style={styles.cardInVal}>
+            <ActionShare color={grey400}/>
+            <div style={{marginRight: '5px'}}>{retweets}</div>
           </div>
-        </CardText>
+        </div>
   		</Card>
     );
   }

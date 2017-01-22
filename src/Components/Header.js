@@ -4,15 +4,14 @@ import AppTabs from './AppTabs';
 import Logo from './Logo';
 
 const style = {
-	flexWrap: 'wrap',
-  padding: '0'
+	flexWrap: 'wrap'
 };
 
 class Header extends Component {
   render() {
     return (
       <div className="header">
-      	<AppBar title="Anti Feed" style={style} iconElementLeft={<Logo />} >
+      	<AppBar title="Anti Feed ~ We burst your social bubble" style={style} iconElementLeft={<Logo />} >
 	        <AppTabs location={this.props.location} />
       	</AppBar>
       </div>

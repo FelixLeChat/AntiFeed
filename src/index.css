@@ -53,7 +53,11 @@ body {
 	margin-left: 15px !important;
 }
 
-.push {
+.logo > span > svg {
+  fill: white !important;
+}.logo > span > svg {
+  fill: white !important;
+}.push {
   height: 100px;
 }
 
@@ -61,6 +65,7 @@ body {
   position: relative;
   margin: 0 auto;
   height: 100px;
+  background-color: #333333;
 }
 
 .wrapper {
@@ -70,4 +75,8 @@ body {
   height: 100%;
   display: block;
   min-height: 800px;
+}
+
+.logo > span > svg {
+  fill: white !important;
 }

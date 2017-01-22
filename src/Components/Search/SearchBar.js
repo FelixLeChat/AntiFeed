@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import Search from 'material-ui/svg-icons/action/search';
-import {grey300, blue500} from 'material-ui/styles/colors';
+import {grey300} from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import ourTheme from '../../Services/ourTheme';
 
