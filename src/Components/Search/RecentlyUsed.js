@@ -6,10 +6,12 @@ const styles = {
     margin: 4,
     cursor: 'hand'
   },
-  wrapper: {
+  chipContainer: {
+  	flexDirection: 'row',
     display: 'flex',
-    flexWrap: 'wrap'
-  },
+    flexWrap: 'wrap',
+    marginBottom: '20px'
+  }
 };
 
 
@@ -26,7 +28,7 @@ class RecentlyUsed extends Component {
 
   render() {
     return (
-			<div style={styles.wrapper}>
+			<div style={styles.chipContainer}>
 				{this.props.keywords.map((item, id) => 
 					<Chip style={styles.chip} key={id} 
 					onTouchTap={this.handleTouchTap}

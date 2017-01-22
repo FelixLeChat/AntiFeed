@@ -1,57 +1,63 @@
 import React, { Component } from 'react';
+import FeedBox from '../Twitter/FeedBox';
 import SearchBar from '../Search/SearchBar';
 import RecentlyUsed from '../Search/RecentlyUsed';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const styles = {
 	searchBarContainer: {
 		display:'flex',
 		justifyContent: 'center',
 		alignItems: 'center',
-		maxWidth: '450px',
 		marginLeft: 'auto',
 		marginRight: 'auto',
+	},
+	container: {
+		marginTop: '40px'
+	},
+	button: {
+		margin: 12,
+  	width: '200px'
 	}
 }
 
 class KeywordFeed extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			keywords: ["trump", "hilary"]
-		};
-
-		this.doSearch = this.doSearch.bind(this);
-		this.removeKeyword = this.removeKeyword.bind(this);
-	}
-
-	doSearch(keyword) {
-		const normalizedKeyword = keyword.toLowerCase();
-		const newArr = [
-			...this.state.keywords.filter(x => x != normalizedKeyword), 
-			normalizedKeyword
-		];
-		this.setState({
-			keywords: newArr,
-		});
-	}
-
-	removeKeyword(id) {
-		const keywords = [ ...this.state.keywords.slice(0, id), ...this.state.keywords.slice(id + 1) ]
-		this.setState({
-			keywords
-		});
-	}
-
   render() {
     return (
-		<div>
-			<h2>Keyword Feed</h2>
-			<RecentlyUsed keywords={this.state.keywords} search={this.doSearch} removeKeyword={this.removeKeyword} />
-			<div style={styles.searchBarContainer}>
-				<SearchBar search={this.doSearch}/>
+		<div style={styles.container}>
+			<div className="row center-xs">
+				<div className="col-xs-8">
+					<RecentlyUsed keywords={this.props.keywords} search={this.props.doSearch} removeKeyword={this.props.removeKeyword} />
+					<div style={styles.searchBarContainer}>
+						<SearchBar search={this.props.doSearch}/>
+					</div>
+				</div>
 			</div>
-			
+
+			<div className="row center-xs">
+				<div className="col-xs-8">
+					<div className="right-button">
+						<RaisedButton label="Refresh Feed" primary={true} style={styles.button} onClick={this.props.addDefaultTweets} />
+					</div>
+				</div>
+			</div>
+
+			<div className="row center-xs">
+				<div className="col-xs-4">
+					<h2>"Pros" Feed</h2>
+    			<div className="box">
+						{this.props.tweets.good && <FeedBox tweets={this.props.tweets.good} />}
+					</div>
+				</div>
+				<div className="col-xs-4">
+					<h2>"Cons" Feed</h2>
+    			<div className="box">
+						{this.props.tweets.bad && <FeedBox tweets={this.props.tweets.bad} />}
+					</div>
+				</div>
+			</div>
+
+
 		</div>
     );
   }
