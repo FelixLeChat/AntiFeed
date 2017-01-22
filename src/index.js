@@ -8,6 +8,9 @@ import AntiFeed from './Components/Feeds/AntiFeed';
 import KeywordFeed from './Components/Feeds/KeywordFeed';
 import TwitterLogin from './Components/Twitter/TwitterLogin';
 
+import { I18nextProvider } from 'react-i18next';
+import i18n from 'i18next';
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
@@ -17,7 +20,7 @@ export default class MainContainer extends Component {
 		super(props);
 
 		this.state = { 
-			keywords: ["trump", "hilary"], 
+			keywords: ["#prolife", "#prochoice"], 
 			keywordsTweets: {positive:[], negative:[]}, 
 			antiTweets: [],
 			isLoading: false
@@ -71,7 +74,7 @@ export default class MainContainer extends Component {
 			profileUrl: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
 		});
 
-		this.setState({keywordsTweets: {positive: newGoodTweets, negative: newBadTweets}}, () => {console.log(this.state.keywordsTweets)});
+		this.setState({keywordsTweets: {positive: newGoodTweets, negative: newBadTweets}});
 	}
 
 	doSearch(keyword) {
@@ -96,7 +99,7 @@ export default class MainContainer extends Component {
   render() {
     return (
 			<Router history={browserHistory}>
-				<Route path="/" component={App}>
+				<Route path="/" component={() => <I18nextProvider i18n={ i18n }><App /></I18nextProvider>}>
 					<IndexRoute component={() => 
 						<KeywordFeed 
 						keywords={this.state.keywords} 
