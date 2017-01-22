@@ -17,7 +17,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
       	<div>
-          <Favicon url={["/svg/bubble-burst.ico"]}/>
+          <Favicon url={["http://historian-hare-63108.netlify.com/svg/bubble-burst.ico"]}/>
 	        <Header location={this.props.location} />
 	        <div>
 	        	{this.props.children}
