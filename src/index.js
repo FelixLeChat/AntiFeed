@@ -56,9 +56,6 @@ export default class MainContainer extends Component {
 		if(keywordLength > 0) {
 			var word = this.state.keywords[keywordLength - 1];
 			this.setState({lastWord: word}, this.doSearch(word));
-
-			console.log("keywords : " + this.state.keywords);
-			console.log("Last Word : " + word);
 		}
 	}
 

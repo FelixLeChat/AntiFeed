@@ -1,14 +1,7 @@
-import cookie from 'react-cookie';
 import React, { Component } from 'react';
 import FeedBox from '../Twitter/FeedBox';
-import RaisedButton from 'material-ui/RaisedButton';
 import Loading from '../Loading/Loading';
 import TweetService from '../../Services/tweets';
-
-const style = {
-  margin: 12,
-  width: '200px'
-};
 
 class AntiFeed extends Component {
 	constructor(props) {

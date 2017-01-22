@@ -53,16 +53,16 @@ function authenticate(tokens) {
   })
 }
 
-function buildTokensUrl(path, tokens) {
-  return `${path}?oauth_token=${tokens.oauth_token}&oauth_verifier=${tokens.oauth_verifier}`;
-}
+// function buildTokensUrl(path, tokens) {
+//   return `${path}?oauth_token=${tokens.oauth_token}&oauth_verifier=${tokens.oauth_verifier}`;
+// }
 
-function getTokens() {
-  return {
-    oauth_token: localStorage.getItem("oauth_token"),
-    oauth_verifier: localStorage.setItem("oauth_verifier")
-  }
-}
+// function getTokens() {
+//   return {
+//     oauth_token: localStorage.getItem("oauth_token"),
+//     oauth_verifier: localStorage.setItem("oauth_verifier")
+//   }
+// }
 
 module.exports = {
   authenticate,
